@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "85171608813",
+    "firebase_url": "https://pressingad.firebaseio.com",
+    "project_id": "pressingad",
+    "storage_bucket": "pressingad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:85171608813:android:ee8572a75e342bd78380e4",
+        "android_client_info": {
+          "package_name": "phineas.pressing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "85171608813-e2nbh9i8epu1puibd8kokdfgqga0f4uk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjcu-UP3ErO2vtpru-CtNjPQKo5snjZGU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "85171608813-e2nbh9i8epu1puibd8kokdfgqga0f4uk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
