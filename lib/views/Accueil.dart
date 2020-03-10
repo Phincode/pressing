@@ -1,11 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:pressing/functions/checking.dart';
 import 'package:pressing/style/style.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pressing/views/inscription.dart';
 
 import 'login.dart';
+import 'login_courtier.dart';
 
 
 class Accueil extends StatefulWidget{
@@ -180,32 +182,52 @@ class _Accueil extends State<Accueil>{
                           case 0:
                            break;
                           case 1:
-                            Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
-                              return new inscription();
-                            }));
+                            check_user().then((res){
+                              if(!res){
+                                Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
+                                  return new inscription(0);
+                                }));
+                              }
+                            });
                             break;
                           case 2:
-                            Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
-                              return new Login();
-                            }));
+                            check_user().then((res){
+                              if(!res){
+                                Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
+                                  return new Login(0);
+                                }));
+                              }
+                            });
 
                           break;
                           case 3:
-                            Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
-                              return new Login();
-                            }));
+                            check_user().then((res){
+                              if(!res){
+                                Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
+                                  return new Login(1);
+                                }));
+                              }
+                            });
 
                             break;
                           case 4:
-                            Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
-                              return new Login();
-                            }));
+                            check_courtier().then((res){
+                              if(!res){
+                                Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
+                                  return new LoginC();
+                                }));
+                              }
+                            });
 
                             break;
                           case 5:
-                            Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
-                              return new Login();
-                            }));
+                            check_user().then((res){
+                              if(!res){
+                                Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
+                                  return new Login(2);
+                                }));
+                              }
+                            });
 
                             break;
                         }

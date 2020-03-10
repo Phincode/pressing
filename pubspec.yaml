@@ -27,6 +27,7 @@ dependencies:
   carousel_slider: ^1.4.1
   cloud_firestore: ^0.13.0+1
   shared_preferences: ^0.5.6+2
+  toast: ^0.1.5
 
 
 dev_dependencies:
@@ -51,6 +52,8 @@ flutter:
     - assets/images/carrousel1.jpg
     - assets/images/carrousel2.jpg
     - assets/images/services.jpg
+    - assets/images/clothes.jpg
+    - assets/images/2642430.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
