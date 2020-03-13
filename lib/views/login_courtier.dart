@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pressing/functions/loginUser.dart';
 import 'package:pressing/style/style.dart';
+import 'package:toast/toast.dart';
 
 import 'espace_courtier.dart';
 
@@ -13,6 +15,9 @@ class LoginC extends StatefulWidget{
 }
 
 class _LoginC extends State<LoginC>{
+  final telephonectr=TextEditingController();
+  final passwordCtr=TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -75,25 +80,52 @@ class _LoginC extends State<LoginC>{
                   child:Container(
                     height: MediaQuery.of(context).size.height/2,
                     child: Form(
+                      key: _formKey,
                       child: ListView(
                         children: <Widget>[
                           Center(child: Text("Connexion Courtier",textAlign: TextAlign.center,textScaleFactor: 1.3,),),
                           SizedBox(height: 50,),
                           new TextFormField(
+                            controller: telephonectr,
                             decoration:InputDecoration(hasFloatingPlaceholder: true,hintText: "Téléphone"),
                             keyboardType: TextInputType.phone,
+                            validator: (t){
+                              if(t.isNotEmpty){
+                                return null;
+                              }
+                              return "numéro de téléphone invalide";
+                            },
                           ),
                           SizedBox(height: 20,),
                           new TextFormField(
+                            controller: passwordCtr,
                             decoration:InputDecoration(hasFloatingPlaceholder: true,hintText: "Password"),
                             keyboardType: TextInputType.text,
+                            validator: (p){
+                              if(p.isNotEmpty){
+                                return null;
+                              }
+                              return "Password invalide";
+                            },
                           ),
                           SizedBox(height: 10,),
                          GestureDetector(
                            onTap: (){
+
+                             if(_formKey.currentState.validate()){
+                               Toast.show("Veillez patienter...", context,duration: 160);
+                               loginCour(telephonectr.value.text,passwordCtr.value.text,context,4);
+                             }
+
+
+                             /*
+
                              Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
                                return new espace_courtier();
                              }));
+
+                              */
+
                            },
                            child:  new Center(
                              child: Container(

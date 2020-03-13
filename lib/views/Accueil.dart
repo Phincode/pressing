@@ -2,12 +2,16 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:pressing/functions/checking.dart';
+import 'package:pressing/functions/get_storedData.dart';
 import 'package:pressing/style/style.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pressing/views/inscription.dart';
+import 'package:pressing/views/menu_prestasimple.dart';
 
+import 'espace_courtier.dart';
 import 'login.dart';
 import 'login_courtier.dart';
+import 'menu_abonnement.dart';
 
 
 class Accueil extends StatefulWidget{
@@ -206,6 +210,10 @@ class _Accueil extends State<Accueil>{
                                 Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
                                   return new Login(1);
                                 }));
+                              }else{
+                                Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
+                                  return new menu_abonnement();
+                                }));
                               }
                             });
 
@@ -216,6 +224,13 @@ class _Accueil extends State<Accueil>{
                                 Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
                                   return new LoginC();
                                 }));
+                              }else{
+                                StoredDataC().then((v){
+                                  Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context){
+                                    return new espace_courtier(v);
+                                  }));
+                                });
+
                               }
                             });
 
@@ -226,6 +241,11 @@ class _Accueil extends State<Accueil>{
                                 Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
                                   return new Login(2);
                                 }));
+                              }else{
+                                Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
+                                  return new menu_presta();
+                                }));
+
                               }
                             });
 
