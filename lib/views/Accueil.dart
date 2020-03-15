@@ -7,6 +7,7 @@ import 'package:pressing/style/style.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pressing/views/inscription.dart';
 import 'package:pressing/views/menu_prestasimple.dart';
+import 'package:pressing/functions/calling.dart';
 
 import 'espace_courtier.dart';
 import 'login.dart';
@@ -143,7 +144,7 @@ class _Accueil extends State<Accueil>{
                                       SizedBox(height: 5,),
                                       GestureDetector(
                                         onTap: (){
-                                          print("$index");
+                                          launchURL("tel:"+snapshot.data.documents[index]["numero"].toString());
                                         },
                                         child: new Container(
                                           height: 20,

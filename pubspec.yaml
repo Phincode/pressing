@@ -28,6 +28,7 @@ dependencies:
   cloud_firestore: ^0.13.0+1
   shared_preferences: ^0.5.6+2
   toast: ^0.1.5
+  url_launcher: ^5.4.2
 
 
 dev_dependencies:
