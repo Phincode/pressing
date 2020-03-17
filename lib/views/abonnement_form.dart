@@ -121,7 +121,7 @@ class _Abonnement extends State<Abonnement>{
                               "nom_packs":dataAbonnement["nom"],
                               "numero_client":numero.value.text,
                               "localisation":localisation.value.text,
-                              "date":DateTime.now().toString(),
+                              'created': FieldValue.serverTimestamp(),
                             }).then((v){
                               Toast.show("Abonnement Enregistré, veillez garder votre téléphone pret de vous.\n Nous vous contacterons pour la confirmation",context,duration: 7);
                             },onError: (err){

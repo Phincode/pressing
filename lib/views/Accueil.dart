@@ -140,7 +140,6 @@ class _Accueil extends State<Accueil>{
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       new Text(" "+snapshot.data.documents[index]["titre"]),
-                                      new Text(" "+snapshot.data.documents[index]["prix"].toString()+ " FCFA"),
                                       SizedBox(height: 5,),
                                       GestureDetector(
                                         onTap: (){
@@ -150,7 +149,20 @@ class _Accueil extends State<Accueil>{
                                           height: 20,
                                           width: 100,
                                           decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(20)),color: Colors.black),
-                                          child: new Center(child: new Text("Commander",style: TextStyle(color: Colors.white),),),
+                                          child: new Center(child: new Text("Appeler",style: TextStyle(color: Colors.white),),),
+                                        ),
+                                      ),
+                                      SizedBox(height: 5,),
+                                      GestureDetector(
+                                        onTap: (){
+                                          launchURL("tel:"+snapshot.data.documents[index]["numero"].toString());
+                                        },
+
+                                        child: new Container(
+                                          height: 20,
+                                          width: 100,
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(20)),color: Colors.black),
+                                          child: new Center(child: new Text("Voir les Tarifs",style: TextStyle(color: Colors.white),),),
                                         ),
                                       ),
                                     ],
