@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pressing/views/Accueil.dart';
 import 'package:pressing/views/admin_home.dart';
+import 'package:pressing/views/splashscreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
         fontFamily: "Avenir",
         primarySwatch: Colors.orange,
       ),
-      home: new Accueil() //new Admin(),
+      home: new splash() //new Admin(),
     );
   }
 }

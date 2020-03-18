@@ -72,14 +72,15 @@ class _mes_abonnement extends State<mes_abonnement>{
                    child: ListView.builder(itemCount: snapshot.data.documents.length ,scrollDirection: Axis.vertical,padding: EdgeInsets.all(20),itemBuilder: (BuildContext context,index){
                      return new Container(
                        margin: EdgeInsets.only(bottom: 20),
-                       height: 150,
+                       height: 120,
                        width: MediaQuery.of(context).size.width,
                        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(20)),color: colorcheck(snapshot.data.documents[index]["etat"])),
                        child: new Center(
                          child: new ListView(
                            children: <Widget>[
                              new Text(snapshot.data.documents[index]["nom_packs"],textAlign: TextAlign.center,),
-                             new Text("Date: "+snapshot.data.documents[index]["date"],textAlign: TextAlign.center,),
+                             new Text("Date: "+snapshot.data.documents[index]["created"].toDate().toString(),textAlign: TextAlign.center,),
+                             SizedBox(height: 10,),
                              new Text("Date Fin:",textAlign: TextAlign.center,),
                            ],
                          ),

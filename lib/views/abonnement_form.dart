@@ -123,7 +123,8 @@ class _Abonnement extends State<Abonnement>{
                               "localisation":localisation.value.text,
                               'created': FieldValue.serverTimestamp(),
                             }).then((v){
-                              Toast.show("Abonnement Enregistré, veillez garder votre téléphone pret de vous.\n Nous vous contacterons pour la confirmation",context,duration: 7);
+                              Toast.show("Abonnement Enregistré, veillez garder votre téléphone pret de vous.\n Nous vous contacterons pour la confirmation",context,duration: 3);
+                              Navigator.pop(context);
                             },onError: (err){
                               Toast.show(err, context);
                             });

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:draggable_scrollbar/draggable_scrollbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
@@ -33,6 +34,7 @@ class _Prestation_demande extends State<Prestation_demande>{
   String vetement="";
 
   final quantite=TextEditingController();
+  final scroocontroller=ScrollController();
 
   var resume="";
   _Prestation_demande(this.data);
@@ -290,19 +292,23 @@ class _Prestation_demande extends State<Prestation_demande>{
             content: new Container(
               height: 300,
               width: 300,
-              child: new ListView(
-                scrollDirection: Axis.vertical,
-                children: <Widget>[
-                  new Divider(height: 10,color: Colors.white,thickness: 2,),
-                  new Text("1.Choissisez un vetement en touchant la liste de vetement que vous verrez! la liste est scrollable de gauche à droite.\n"),
-                  new Text("2.vous précisez la quantité dans le champs 'quantité'.\n"),
-                  new Text("3.Vous toucher le bouton '+' en bas de  'quantité'.\n"),
-                  new Text("4.Votre choix s'affichera dans le résumé, en bas du bouton  '+'.\n"),
-                  new Text("5.Vous avez la possibilité de choisir et d'ajouter autant de vetement que vous désirez'+'.\n"),
-                  new Text("6.Si vous avez fini d'ajouter, toucher le bouton 'Valider' pour soumettre le formulaire+'.\n"),
-                  new Divider(height: 10,color: Colors.white,thickness: 2,)
-                ],
-              ),
+              child: DraggableScrollbar.semicircle(
+                alwaysVisibleScrollThumb: true,
+                controller: scroocontroller,
+                  child: new ListView(
+                    controller: scroocontroller,
+                    scrollDirection: Axis.vertical,
+                    children: <Widget>[
+                      new Divider(height: 10,color: Colors.white,thickness: 2,),
+                      new Text("1.Choissisez un vetement en touchant la liste de vetement que vous verrez! la liste est scrollable de gauche à droite.\n"),
+                      new Text("2.vous précisez la quantité dans le champs 'quantité'.\n"),
+                      new Text("3.Vous toucher le bouton '+' en bas de  'quantité'.\n"),
+                      new Text("4.Votre choix s'affichera dans le résumé, en bas du bouton  '+'.\n"),
+                      new Text("5.Vous avez la possibilité de choisir et d'ajouter autant de vetement que vous désirez'+'.\n"),
+                      new Text("6.Si vous avez fini d'ajouter, toucher le bouton 'Valider' pour soumettre le formulaire+'.\n"),
+                      new Divider(height: 10,color: Colors.white,thickness: 2,)
+                    ],
+                  )),
             ),
             actions: <Widget>[
               new RaisedButton(onPressed: (){

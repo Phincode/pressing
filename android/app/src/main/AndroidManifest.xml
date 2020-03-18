@@ -8,8 +8,8 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="pressing"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Mavi Pressing"
+        android:icon="@drawable/logo2">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

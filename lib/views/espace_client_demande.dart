@@ -72,7 +72,7 @@ class _espace_client extends State<espace_client>{
             Container(
               height: (MediaQuery.of(context).size.height - MediaQuery.of(context).size.height/2.9),
               child: StreamBuilder(
-                stream: Firestore.instance.collection("client_services").where('id_client',isEqualTo:data[0]["id"]).snapshots(),
+                stream: Firestore.instance.collection("client_services").where('id_client',isEqualTo:data[0]["id"]).orderBy("created",descending: true)  .snapshots(),
                 builder: (BuildContext context,snapshot){
                   if(snapshot.hasData){
                     return  ListView.builder(itemCount:snapshot.data.documents.length,scrollDirection: Axis.vertical,padding: EdgeInsets.all(20),itemBuilder: (BuildContext context,index){

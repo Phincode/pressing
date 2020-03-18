@@ -44,3 +44,25 @@ List <Map>menu=[
     "icon":Icons.wc,
   }
 ];
+List <Map>data=[
+  {
+    "action":"+22549896203",
+    "image":"assets/images/services.jpg",
+    "prix":"",
+    "titre":"Lavage & Repassage"
+  },
+  {
+    "action":"+22549896203",
+    "image":"assets/images/services.jpg",
+    "prix":"",
+    "titre":"Lavage & Repassage"
+  },
+  {
+    "action":"+22549896203",
+    "image":"assets/images/services.jpg",
+    "prix":"",
+    "titre":"Lavage & Repassage"
+  },
+
+
+];
