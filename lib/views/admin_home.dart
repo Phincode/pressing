@@ -1,16 +1,24 @@
+import 'dart:io';
+
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pressing/functions/checking.dart';
 import 'package:pressing/functions/get_storedData.dart';
 import 'package:pressing/style/style.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pressing/views/Accueil.dart';
 import 'package:pressing/views/gestion_courtier.dart';
 import 'package:pressing/views/inscription.dart';
 import 'package:pressing/views/menu_prestasimple.dart';
 import 'package:pressing/functions/calling.dart';
+import 'package:toast/toast.dart';
 
+import 'admin_catalogue_vetement.dart';
 import 'admin_gestionAbonnement.dart';
+import 'admin_gestion_service_ajout.dart';
 import 'admin_gestion_services.dart';
 import 'espace_courtier.dart';
 import 'login.dart';
@@ -31,7 +39,10 @@ class Admin extends StatefulWidget{
 class _Admin extends State<Admin>{
   int slideIndex=0;
   bool isclickMenu=false;
+  final password=TextEditingController();
   var ico=Icon(Icons.dehaze);
+
+  File img;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +56,7 @@ class _Admin extends State<Admin>{
             new Container(
               height: 50,
               width: 50,
-              decoration: BoxDecoration(shape: BoxShape.circle,image: DecorationImage(image: AssetImage("assets/images/logoAccueil.PNG"),fit: BoxFit.cover)),
+              decoration: BoxDecoration(shape: BoxShape.circle,image: DecorationImage(image: AssetImage("assets/images/logo2.png"),fit: BoxFit.cover)),
             ),
             SizedBox(width: 10,),
           ],
@@ -100,7 +111,11 @@ class _Admin extends State<Admin>{
                                         child: new Text(document["texte"],style: TextStyle(color: Colors.white),textAlign: TextAlign.center,),
                                       ),
                                     ),
-
+                                    new IconButton(icon:Icon(Icons.delete,size: 50,color: Colors.white),onPressed: () async {
+                                           await Firestore.instance.collection("slidesshows").document(document.documentID).delete();
+                                           print("ok");
+                                    },),
+                                   
                                   ],
                                 );
                               },
@@ -192,6 +207,11 @@ class _Admin extends State<Admin>{
                              ),
                            ),
                            GestureDetector(
+                             onTap: (){
+                               Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
+                                 return moderation_service();
+                               }));
+                             },
                              child: new Container(
                                width: 50,
                                height: 50,
@@ -208,6 +228,9 @@ class _Admin extends State<Admin>{
                              ),
                            ),
                            GestureDetector(
+                             onTap: (){
+                               more();
+                             },
                              child: new Container(
                                width: 50,
                                height: 50,
@@ -224,6 +247,11 @@ class _Admin extends State<Admin>{
                              ),
                            ),
                            GestureDetector(
+                             onTap: (){
+                               Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
+                                 return new catalogue();
+                               }));
+                             },
                              child: new Container(
                                width: 50,
                                height: 50,
@@ -260,6 +288,9 @@ class _Admin extends State<Admin>{
                         onTap: (){
                           switch(index){
                             case 0:
+                              Navigator.pushReplacement(context, new MaterialPageRoute(builder: (BuildContext context){
+                                return new Accueil();
+                              }));
                               break;
                             case 1:
                               check_user().then((res){
@@ -355,5 +386,92 @@ class _Admin extends State<Admin>{
 
     );
   }
+  void more(){
+    showDialog(context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context){
+          return new AlertDialog(
+            backgroundColor: Colors.orangeAccent,
+            title: new Text("Ajout Slide",textAlign: TextAlign.center,),
+            content: new Container(
+                height: 300,
+                width: 300,
+                child:new ListView(
+                  scrollDirection: Axis.vertical,
+                  children: <Widget>[
+                    new Divider(height: 10,color: Colors.white,thickness: 2,),
+                    new Text("Pour Ajouter un Slide veillez soumettre ces informations:\n"),
+                    new Text("Image de préference 200 x 100:\n"),
+                    GestureDetector(
+                      onTap: () async{
+                        await ImagePicker.pickImage(source: ImageSource.gallery,maxWidth: 200,maxHeight: 112).then((image){
+                          if(image!=null){
+                            setState(() {
+                              img=image;
+                            });
+                            Navigator.pop(context);
+                            more();
+                          }
+                        });
+                      },
+                      child: Center(
+                        child: Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(shape: BoxShape.circle,image:(img==null)?DecorationImage(image: AssetImage("assets/images/services.jpg"),fit: BoxFit.cover): DecorationImage(image: FileImage(img),fit: BoxFit.cover)),
+                          child: new Center(
+                            child: new Icon(Icons.add),
+                          ),
+                        ),
+                      ),
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(hintText: "Titre"),
+                      keyboardType: TextInputType.text,
+                      controller: password,
+                    ),
 
+                  ],
+                )
+            ),
+            actions: <Widget>[
+              new RaisedButton(onPressed: (){
+                Navigator.pop(context);
+              },child: new Text("Fermer"),),
+              new RaisedButton(onPressed: () async {
+                Toast.show("Traitement en cours...", context,duration: 160);
+                if(password.value.text.isNotEmpty && img!=null){
+                  StorageReference storageReference = FirebaseStorage().ref();
+                  var uploadTask = storageReference
+                      .child("sildes")
+                      .child(DateTime.now().toString())
+                      .putFile(img);
+                  var storageSnapshot = await uploadTask.onComplete;
+                  var url = await storageSnapshot.ref.getDownloadURL();
+                  Firestore.instance.collection("slidesshows").document().setData({
+                    'texte':password.value.text,
+                    'image':url.toString(),
+                    'created':FieldValue.serverTimestamp()
+                  }).then((v){
+                    Toast.show("ok", context);
+                    password.clear();
+                    Navigator.pop(context);
+                  },onError: (err){
+                    Toast.show("$err", context);
+                    Navigator.pop(context);
+                  });
+
+
+                }else{
+                  Toast.show("Informations insuffisante pour la validation", context);
+                }
+
+              },child: new Text("Valider"),),
+
+            ],
+
+          );
+        }
+    );
+  }
 }

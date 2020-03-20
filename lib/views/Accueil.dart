@@ -6,6 +6,7 @@ import 'package:pressing/functions/checking.dart';
 import 'package:pressing/functions/get_storedData.dart';
 import 'package:pressing/style/style.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pressing/views/admin_home.dart';
 import 'package:pressing/views/inscription.dart';
 import 'package:pressing/views/menu_prestasimple.dart';
 import 'package:pressing/functions/calling.dart';
@@ -262,6 +263,9 @@ class _Accueil extends State<Accueil>{
                           onTap: (){
                             switch(index){
                               case 0:
+                                Navigator.pushReplacement(context, new MaterialPageRoute(builder: (BuildContext context){
+                                  return new Admin();
+                                }));
                                 break;
                               case 1:
                                 check_user().then((res){
