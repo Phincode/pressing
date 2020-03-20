@@ -5,10 +5,13 @@ import 'package:pressing/functions/checking.dart';
 import 'package:pressing/functions/get_storedData.dart';
 import 'package:pressing/style/style.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pressing/views/gestion_courtier.dart';
 import 'package:pressing/views/inscription.dart';
 import 'package:pressing/views/menu_prestasimple.dart';
 import 'package:pressing/functions/calling.dart';
 
+import 'admin_gestionAbonnement.dart';
+import 'admin_gestion_services.dart';
 import 'espace_courtier.dart';
 import 'login.dart';
 import 'login_courtier.dart';
@@ -125,14 +128,112 @@ class _Admin extends State<Admin>{
                     child: new GridView(gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),padding: EdgeInsets.all(20),
                          children: <Widget>[
                            GestureDetector(
+                             onTap: (){
+                               Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
+                                 return admin_espace_gestion_services();
+                               }));
+                             },
                              child: new Container(
-                               width: 100,
-                               height: 100,
-                               decoration: BoxDecoration(color: Colors.greenAccent),
+                               width: 50,
+                               height: 50,
+                               margin: EdgeInsets.only(right: 2),
+                               decoration: BoxDecoration(color: Orange),
                                child: new Center(
-                                 child: ListView(
+                                 child: Column(
                                    children: <Widget>[
-                                     new Icon(Icons.directions_run,size: 70,color: Colors.white,)
+                                     new Icon(Icons.directions_run,size: 70,color: Colors.white,),
+                                     new Text("Gestion des demandes de Service",textAlign: TextAlign.center,)
+                                   ],
+                                 ),
+                               ),
+                             ),
+                           ),
+
+                           GestureDetector(
+                             onTap: (){
+                               Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
+                                 return Admin_abonnement();
+                               }));
+                             },
+                             child: new Container(
+                               width: 50,
+                               height: 50,
+                               margin: EdgeInsets.only(right: 2),
+                               decoration: BoxDecoration(color: Colors.orangeAccent),
+                               child: new Center(
+                                 child: Column(
+                                   children: <Widget>[
+                                     new Icon(Icons.assignment,size: 70,color: Colors.white,),
+                                     new Text("Gestion des Abonnements",textAlign: TextAlign.center,)
+                                   ],
+                                 ),
+                               ),
+                             ),
+                           ),
+                           GestureDetector(
+                             onTap: (){
+                               Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
+                                 return Gestion_courtier();
+                               }));
+                             },
+                             child: new Container(
+                               width: 50,
+                               height: 50,
+                               margin: EdgeInsets.only(right: 2,top: 2),
+                               decoration: BoxDecoration(color: Colors.orangeAccent),
+                               child: new Center(
+                                 child: Column(
+                                   children: <Widget>[
+                                     new Icon(Icons.person_add,size: 70,color: Colors.white,),
+                                     new Text("Ajouter Courtier",textAlign: TextAlign.center,)
+                                   ],
+                                 ),
+                               ),
+                             ),
+                           ),
+                           GestureDetector(
+                             child: new Container(
+                               width: 50,
+                               height: 50,
+                               margin: EdgeInsets.only(right: 2,top: 2),
+                               decoration: BoxDecoration(color:Orange),
+                               child: new Center(
+                                 child: Column(
+                                   children: <Widget>[
+                                     new Icon(Icons.content_copy,size: 70,color: Colors.white,),
+                                     new Text("Gestion des services",textAlign: TextAlign.center,)
+                                   ],
+                                 ),
+                               ),
+                             ),
+                           ),
+                           GestureDetector(
+                             child: new Container(
+                               width: 50,
+                               height: 50,
+                               margin: EdgeInsets.only(right: 2,top: 2),
+                               decoration: BoxDecoration(color:Orange),
+                               child: new Center(
+                                 child: Column(
+                                   children: <Widget>[
+                                     new Icon(Icons.launch,size: 70,color: Colors.white,),
+                                     new Text("Gestion des Slides",textAlign: TextAlign.center,)
+                                   ],
+                                 ),
+                               ),
+                             ),
+                           ),
+                           GestureDetector(
+                             child: new Container(
+                               width: 50,
+                               height: 50,
+                               margin: EdgeInsets.only(right: 2,top: 2),
+                               decoration: BoxDecoration(color:Colors.orangeAccent),
+                               child: new Center(
+                                 child: Column(
+                                   children: <Widget>[
+                                     new Icon(Icons.launch,size: 70,color: Colors.white,),
+                                     new Text("Gestion du catalogue de vetement",textAlign: TextAlign.center,)
                                    ],
                                  ),
                                ),

@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         fontFamily: "Avenir",
         primarySwatch: Colors.orange,
       ),
-      home: new splash() //new Admin(),
+      home: new Admin() //new splash() //,
     );
   }
 }

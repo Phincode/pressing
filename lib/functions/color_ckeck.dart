@@ -1,4 +1,5 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 Color colorcheck(String data){
@@ -12,6 +13,26 @@ Color colorcheck(String data){
   }else if(data.contains("terminer")){
     color=Colors.orangeAccent;
 
+  }
+
+  return color;
+
+}
+Color colorcheck3(String data, DateTime date,id){
+
+  var color=Colors.greenAccent;
+
+  if(data.contains("En atente")){
+
+
+  }else if(DateTime.now().isAfter(date)){
+    Firestore.instance.collection("client_abonnement").document(id).updateData({
+      'etat':'terminer'
+    });
+    color=Colors.orangeAccent;
+
+  }else{
+    color=Colors.pinkAccent;
   }
 
   return color;
